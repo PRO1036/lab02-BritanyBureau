@@ -1,7 +1,7 @@
 ---
 title: "Lab 02 - Plastic waste"
-author: "Votre nom"
-date: "La date"
+author: "Britany Bureau"
+date: "15 septembre 2025"
 output: github_document
 ---
 
@@ -28,16 +28,19 @@ plastic_waste <- plastic_waste %>%
 ### Exercise 1
 
 ```{r plastic-waste-continent}
-# insert code here
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
+  geom_histogram(binwidth = 0.2)+
+  facet_wrap(.~continent)
 ```
 
 ### Exercise 2
 
 ```{r plastic-waste-density}
-# insert code here
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
+  geom_density(alpha = 0.5)
 ```
 
-Réponse à la question...
+Le réglage de la couleur (color et fill) est dans la partie aes, car il consite seulement à colorié les continents. Cependant pour le réglage de la transparence (alpha), dans le paramètre aes, le logiciel essaie de mettre la transparence proportionnelle à la variable. Cependant, comme un continent n'est pas plus un continent qu'un autre, cela est impossible. C'est pourquoi on met ce réglage dans geom_density() afin que toutes les courbes soient de même transparence (choisie).  
 
 ### Exercise 3
 
