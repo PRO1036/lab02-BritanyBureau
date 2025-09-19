@@ -55,41 +55,60 @@ que toutes les courbes soient de même transparence (choisie).
 Boxplot:
 
 ``` r
-# insert code here
+ggplot(data = plastic_waste, aes(x = continent, y = plastic_waste_per_cap))+
+  geom_boxplot()
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
 
 Violin plot:
 
 ``` r
-# insert code here
+ggplot(data = plastic_waste, aes(x = continent, y = plastic_waste_per_cap))+
+  geom_violin()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
+
+Les violi plots permettent de voir la distribution des données
+comparément aux boxplots.
 
 ### Exercise 4
 
 ``` r
-# insert code here
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
+  geom_point()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
+
+Sur le graphe, on observe dans l’ensemble une relation
+proportionnellement positive. Quand on ajoute la couleur par continent,
+on peut voir que l’Afrique, l’Asie et l’Océanie tendent à avoir plus de
+déchets non-gérés que les autres contients. On voit aussi que l’Amérique
+du sud a moins de données que les autres et qu’elles sont plus basses.
 
 ### Exercise 5
 
 ``` r
-# insert code here
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop))+
+  geom_point()
 ```
 
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](lab-02_files/figure-gfm/plastic-waste-population-total-1.png)<!-- -->
+
 ``` r
-# insert code here
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = coastal_pop))+
+  geom_point()
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
 
 Réponse à la question…
 
 ## Conclusion
 
 Recréez la visualisation:
-
-``` r
-# insert code here
-```
