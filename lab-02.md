@@ -28,16 +28,21 @@ plastic_waste <- plastic_waste %>%
 ``` r
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
   geom_histogram(binwidth = 0.2)+
-  facet_wrap(.~continent)
+  facet_wrap(.~continent)+
+  labs(title = "Quantité de déchets plastiques par habitant en kg/jour selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Nombre")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- -->
+
+La quantité de déchets platiques par habitant est moins élevées en
+Océanie et en Amérique du sud.
 
 ### Exercise 2
 
 ``` r
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
-  geom_density(alpha = 0.5)
+  geom_density(alpha = 0.5)+
+  labs(title= "Densité de déchets plastiques par habitant en kg/jour selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Densité")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
@@ -56,7 +61,8 @@ Boxplot:
 
 ``` r
 ggplot(data = plastic_waste, aes(x = continent, y = plastic_waste_per_cap))+
-  geom_boxplot()
+  geom_boxplot()+
+  labs(title = "Quantité de déchets plastiques par habitant en fontion du continent", x = "Continent", y = "Quantité de déchets plastiques par habitant en kg/jour" )
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
@@ -65,19 +71,21 @@ Violin plot:
 
 ``` r
 ggplot(data = plastic_waste, aes(x = continent, y = plastic_waste_per_cap))+
-  geom_violin()
+  geom_violin()+
+  labs(title = "Quantité de déchets plastiques par habitant en fontion du continent", x = "Continent", y = "Quantité de déchets plastiques par habitant en kg/jour" )
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
 
-Les violi plots permettent de voir la distribution des données
-comparément aux boxplots.
+Les violin plots permettent de voir la distribution des données
+contrairement aux boxplots.
 
 ### Exercise 4
 
 ``` r
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
-  geom_point()
+  geom_point()+
+  labs(title = "Relation entre les déchets plastiques et ceux non gérés ", x = "Quantité de déchets plastiques par habitant en kg/jour ", y = "Quantité de déchets plastiques non gérés")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
@@ -92,7 +100,8 @@ du sud a moins de données que les autres et qu’elles sont plus basses.
 
 ``` r
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop))+
-  geom_point()
+  geom_point()+
+  labs(title = "Relation entre la population totale et la quantité de déchets plastiques", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Population totale")
 ```
 
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
@@ -102,12 +111,15 @@ ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop))+
 
 ``` r
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = coastal_pop))+
-  geom_point()
+  geom_point()+
+  labs(title = "Relation entre la population costale et la quantité de déchets plastiques", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Population costale")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
 
-Réponse à la question…
+Dans ces graphes, il est difficile d’observer les relations puisque les
+échelles de la population sont très grandes. Cependant, on peut observer
+une relation un peu plus forte pour la population costale.
 
 ## Conclusion
 
