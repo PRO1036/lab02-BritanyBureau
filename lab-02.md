@@ -1,7 +1,7 @@
 Lab 02 - Plastic waste
 ================
 Britany Bureau
-15 septembre 2025
+18 septembre 2025
 
 ## Chargement des packages et des données
 
