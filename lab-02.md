@@ -29,7 +29,7 @@ plastic_waste <- plastic_waste %>%
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
   geom_histogram(binwidth = 0.2)+
   facet_wrap(.~continent)+
-  labs(title = "Quantité de déchets plastiques par habitant en kg/jour selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Nombre")
+  labs(title = "Quantité de déchets plastiques par habitant en kg/jour", subtitle = "Selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Nombre")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- -->
@@ -42,7 +42,7 @@ Océanie et en Amérique du sud.
 ``` r
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
   geom_density(alpha = 0.5)+
-  labs(title= "Densité de déchets plastiques par habitant en kg/jour selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Densité")
+  labs(title= "Densité de déchets plastiques par habitant en kg/jour", subtitle = "Selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Densité", color = "Continent", fill = "Continent")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
@@ -85,7 +85,7 @@ contrairement aux boxplots.
 ``` r
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
   geom_point()+
-  labs(title = "Relation entre les déchets plastiques et ceux non gérés ", x = "Quantité de déchets plastiques par habitant en kg/jour ", y = "Quantité de déchets plastiques non gérés")
+  labs(title = "Relation entre les déchets plastiques et ceux non gérés ", subtitle = "Selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour ", y = "Quantité de déchets plastiques non gérés", color = "Continent")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
@@ -124,3 +124,30 @@ une relation un peu plus forte pour la population costale.
 ## Conclusion
 
 Recréez la visualisation:
+
+``` r
+ggplot(data = plastic_waste, aes(y = plastic_waste_per_cap, x = coastal_pop/total_pop, color = continent))+
+  geom_point()+
+  geom_smooth(method ="loess",
+              se = TRUE,
+              color = "black")+
+  theme_minimal()+
+  labs(title = "Quantité de déchets plastiques vs Population côtière",
+       subtitle = "Selon le continent", x = "Proportion de la population côtière (Coastal/total population)", y = "Nombre de déchets platiques par habitant", color = "Continent")
+```
+
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+    ## Warning: Removed 10 rows containing non-finite outside the scale range
+    ## (`stat_smooth()`).
+
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- -->
+
+Dans ce graphe, on peut observer la tendance globale grâce à la ligne
+noire et la bande grise. Cette tendance n’est pas linéaire, car les
+points sont plutôt dispersés. La relation est donc faible, mais là tout
+de même : la population côtière auraient tendance à avoir plus de
+déchets plastiques (relation faible).

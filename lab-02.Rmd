@@ -13,6 +13,7 @@ library(tidyverse)
 
 ```{r load-data, message=FALSE}
 plastic_waste <- read_csv("data/plastic-waste.csv")
+
 ```
 
 Commençons par filtrer les données pour retirer le point représenté par Trinité et Tobago (TTO) qui est un outlier.
@@ -31,7 +32,7 @@ plastic_waste <- plastic_waste %>%
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
   geom_histogram(binwidth = 0.2)+
   facet_wrap(.~continent)+
-  labs(title = "Quantité de déchets plastiques par habitant en kg/jour selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Nombre")
+  labs(title = "Quantité de déchets plastiques par habitant en kg/jour", subtitle = "Selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Nombre")
 ```
 
 La quantité de déchets platiques par habitant est moins élevées en Océanie et en Amérique du sud. 
@@ -41,7 +42,7 @@ La quantité de déchets platiques par habitant est moins élevées en Océanie 
 ```{r plastic-waste-density}
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
   geom_density(alpha = 0.5)+
-  labs(title= "Densité de déchets plastiques par habitant en kg/jour selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Densité")
+  labs(title= "Densité de déchets plastiques par habitant en kg/jour", subtitle = "Selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Densité", color = "Continent", fill = "Continent")
 ```
 
 Le réglage de la couleur (color et fill) est dans la partie aes, car il consite seulement à colorié les continents. Cependant pour le réglage de la transparence (alpha), dans le paramètre aes, le logiciel essaie de mettre la transparence proportionnelle à la variable. Cependant, comme un continent n'est pas plus un continent qu'un autre, cela est impossible. C'est pourquoi on met ce réglage dans geom_density() afin que toutes les courbes soient de même transparence (choisie).  
@@ -72,7 +73,7 @@ Les violin plots permettent de voir la distribution des données contrairement a
 ```{r plastic-waste-mismanaged}
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
   geom_point()+
-  labs(title = "Relation entre les déchets plastiques et ceux non gérés ", x = "Quantité de déchets plastiques par habitant en kg/jour ", y = "Quantité de déchets plastiques non gérés")
+  labs(title = "Relation entre les déchets plastiques et ceux non gérés ", subtitle = "Selon le continent", x = "Quantité de déchets plastiques par habitant en kg/jour ", y = "Quantité de déchets plastiques non gérés", color = "Continent")
 ```
 
 Sur le graphe, on observe dans l'ensemble une relation proportionnellement positive. Quand on ajoute la couleur par continent, on peut voir que l'Afrique, l'Asie et l'Océanie tendent à avoir plus de déchets non-gérés que les autres contients. On voit aussi que l'Amérique du sud a moins de données que les autres et qu'elles sont plus basses. 
@@ -99,5 +100,14 @@ Dans ces graphes, il est difficile d'observer les relations puisque les échelle
 Recréez la visualisation:
 
 ```{r recreate-viz}
-
+ggplot(data = plastic_waste, aes(y = plastic_waste_per_cap, x = coastal_pop/total_pop, color = continent))+
+  geom_point()+
+  geom_smooth(method ="loess",
+              se = TRUE,
+              color = "black")+
+  theme_minimal()+
+  labs(title = "Quantité de déchets plastiques vs Population côtière",
+       subtitle = "Selon le continent", x = "Proportion de la population côtière (Coastal/total population)", y = "Nombre de déchets platiques par habitant", color = "Continent")
 ```
+
+Dans ce graphe, on peut observer la tendance globale grâce à la ligne noire et la bande grise. Cette tendance n'est pas linéaire, car les points sont plutôt dispersés. La relation est donc faible, mais là tout de même : la population côtière auraient tendance à avoir plus de déchets plastiques (relation faible). 
